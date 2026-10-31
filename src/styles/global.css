@@ -1,45 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  --color-nuit: #0b1f3a;
-  --color-azur: #0b5fff; /* fond de boutons / icônes avec texte blanc (contraste ~5:1) */
-  --color-ciel: #22d3ee; /* accent sur fond sombre */
-  --color-brume: #f4f7fb;
-  --font-sans: "Poppins", system-ui, sans-serif;
+  --color-rack: #eef1f3;
+  --color-encre: #14202b;
+  --color-ambre: #ffb020;
+  --color-cable: #1f4fd8;
+  --color-voyant: #0b7a4b;
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-sans: "Instrument Sans", system-ui, sans-serif;
 }
 
 html { scroll-behavior: smooth; scroll-padding-top: 5rem; -webkit-text-size-adjust: 100%; }
 
 body {
-  background: #ffffff;
-  color: var(--color-nuit);
+  background: #fff;
+  color: var(--color-encre);
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 1.0625rem;
   line-height: 1.6;
 }
 
-:focus-visible { outline: 3px solid var(--color-azur); outline-offset: 3px; border-radius: 0.375rem; }
-.on-dark :focus-visible { outline-color: var(--color-ciel); }
+h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.025em; }
+
+:focus-visible { outline: 3px solid var(--color-cable); outline-offset: 3px; border-radius: 0.375rem; }
+.on-dark :focus-visible { outline-color: var(--color-ambre); }
 
 .skip-link {
   position: absolute; left: 1rem; top: -4rem; z-index: 100;
-  background: var(--color-nuit); color: #fff;
-  padding: 0.75rem 1.25rem; border-radius: 0.75rem; transition: top 0.2s;
+  background: var(--color-encre); color: #fff;
+  padding: 0.75rem 1.25rem; border-radius: 9999px; transition: top 0.2s;
 }
 .skip-link:focus { top: 1rem; }
 
 .btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  min-height: 44px; min-width: 44px; border-radius: 9999px;
-  padding: 0.75rem 1.75rem; font-weight: 500;
-  transition: background-color 0.25s, color 0.25s, transform 0.25s;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  min-height: 48px; min-width: 48px; border-radius: 9999px;
+  padding: 0.75rem 1.75rem; font-weight: 600;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
 }
 .btn:active { transform: scale(0.97); }
 
-.reveal, .hero-item { opacity: 0; }
+.hero-item { opacity: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal, .hero-item { opacity: 1 !important; transform: none !important; }
+  .hero-item { opacity: 1 !important; transform: none !important; }
   * { transition-duration: 0.01ms !important; }
 }

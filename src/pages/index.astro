@@ -8,93 +8,135 @@ const waLink = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(cont
 const telLink = `tel:${contact.telephone.replace(/\s/g, "")}`;
 const mailLink = `mailto:${contact.email}`;
 const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.adresse)}`;
+
+// Schéma réseau du hero : positions en % du carré, Pascal au centre
+const noeuds = [
+  { icon: "wifi", x: 50, y: 15 },
+  { icon: "tower", x: 83.3, y: 39.2 },
+  { icon: "server", x: 70.6, y: 78.3 },
+  { icon: "phone", x: 29.4, y: 78.3 },
+  { icon: "network", x: 16.7, y: 39.2 },
+];
 ---
 
 <Layout>
-  <header class="fixed top-0 inset-x-0 z-50 bg-white/95 border-b border-slate-200">
-    <nav class="max-w-5xl mx-auto flex items-center justify-between px-5 py-2" aria-label="Navigation principale">
-      <a href="#accueil" class="text-lg font-bold min-h-[44px] inline-flex items-center">{client.nom}</a>
-      <a href={telLink} class="btn gap-2 bg-azur text-white hover:bg-nuit !py-2 !px-5 text-sm">
+  <header class="on-dark fixed top-0 inset-x-0 z-50 bg-encre/90 backdrop-blur border-b border-white/10 text-white">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between px-5 py-2" aria-label="Navigation principale">
+      <a href="#accueil" class="font-display font-bold text-lg min-h-[48px] inline-flex items-center">Pascal Catala</a>
+      <a href={telLink} class="btn bg-ambre text-encre hover:bg-white !py-2 !px-5 text-base">
         <Icon name="phone" class="w-5 h-5" />Appeler
       </a>
     </nav>
   </header>
 
   <main id="contenu">
-    <!-- 1. ACCUEIL -->
-    <section id="accueil" class="on-dark relative overflow-hidden bg-gradient-to-br from-nuit to-slate-800 text-white px-5 pt-32 pb-24">
-      <div class="absolute -right-10 top-24 text-ciel/15 hidden md:block" aria-hidden="true">
-        <Icon name="tower" class="w-96 h-96" />
-      </div>
-      <div class="relative max-w-5xl mx-auto">
-        <p class="hero-item inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-ciel font-semibold">
-          <Icon name="pin" class="w-4 h-4" />Fort-de-France · Martinique
-        </p>
-        <h1 class="hero-item text-5xl sm:text-7xl font-extrabold mt-4 leading-[1.05]">{client.nom}</h1>
-        <p class="hero-item mt-4 text-xl sm:text-2xl font-medium text-ciel">{client.metier}</p>
-        <p class="hero-item mt-6 text-lg text-slate-200 max-w-xl text-balance">{client.accroche}</p>
+    <!-- 1. PRÉSENTATION -->
+    <section id="accueil" class="on-dark relative overflow-hidden bg-encre text-white px-5 pt-28 pb-20 md:pt-36 md:pb-28 bg-[radial-gradient(circle_at_85%_15%,rgba(31,79,216,0.35),transparent_55%)]">
+      <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
+        <div>
+          <p class="txt hero-item inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm">
+            <Icon name="pin" class="w-4 h-4 text-ambre" />Fort-de-France, Martinique
+          </p>
+          <h1 class="txt hero-item font-display font-extrabold text-5xl sm:text-7xl leading-[1] mt-6">{client.nom}</h1>
+          <p class="txt hero-item mt-4 font-display text-2xl sm:text-3xl font-semibold text-ambre">{client.metier}</p>
+          <p class="txt hero-item mt-6 text-lg text-slate-200 max-w-[48ch]">{client.presentation}</p>
 
-        <div class="hero-item mt-10 flex flex-col sm:flex-row gap-3">
-          <a href={telLink} class="btn gap-2 bg-ciel text-nuit font-semibold hover:bg-white">
-            <Icon name="phone" class="w-5 h-5" />Appeler maintenant
-          </a>
-          <a href={waLink} target="_blank" rel="noopener noreferrer" class="btn gap-2 bg-emerald-700 text-white hover:bg-emerald-600">
-            <Icon name="whatsapp" class="w-5 h-5" />WhatsApp
-          </a>
+          <div class="txt hero-item mt-9 flex flex-col sm:flex-row gap-3">
+            <a href={telLink} class="btn bg-ambre text-encre hover:bg-white"><Icon name="phone" class="w-5 h-5" />Appeler Pascal</a>
+            <a href={waLink} target="_blank" rel="noopener noreferrer" class="btn bg-voyant text-white hover:bg-emerald-600"><Icon name="whatsapp" class="w-5 h-5" />WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- Schéma : Pascal relie vos équipements -->
+        <div class="relative mx-auto w-full max-w-[420px] aspect-square" aria-hidden="true">
+          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 400" focusable="false">
+            {noeuds.map((n) => (
+              <line class="link" x1="200" y1="200" x2={n.x * 4} y2={n.y * 4} stroke="#ffb020" stroke-opacity="0.6" stroke-width="2.5" stroke-linecap="round" />
+            ))}
+          </svg>
+          {noeuds.map((n) => (
+            <div class="absolute -translate-x-1/2 -translate-y-1/2" style={`left:${n.x}%;top:${n.y}%`}>
+              <div class="node hero-item w-16 h-16 rounded-full bg-encre border-2 border-white/30 flex items-center justify-center text-ambre">
+                <Icon name={n.icon} class="w-7 h-7" />
+              </div>
+            </div>
+          ))}
+          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div class="hub hero-item w-24 h-24 rounded-full bg-ambre text-encre flex items-center justify-center font-display font-extrabold text-3xl">PC</div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 2. SERVICES -->
-    <section id="services" class="px-5 py-20 bg-brume">
-      <div class="max-w-5xl mx-auto">
-        <h2 class="reveal text-3xl sm:text-4xl font-bold text-center">Mes services</h2>
-        <p class="reveal mt-3 text-center text-slate-600">Réseaux et télécoms, de l'installation au dépannage.</p>
+    <section id="services" class="bg-rack px-5 py-20 md:py-28">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="font-display text-4xl sm:text-5xl font-bold text-center">Mes services</h2>
+        <p class="mt-3 text-center text-encre/80">Du câblage au dépannage, tout ce qu'il faut pour que ça fonctionne.</p>
+
         <ul class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((s) => (
-            <li class="reveal">
-              <article class="h-full rounded-3xl bg-white p-7 border border-slate-200">
-                <span class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-azur text-white">
-                  <Icon name={s.icon} class="w-7 h-7" />
+            <li>
+              <article class="h-full rounded-3xl bg-white p-7 border border-encre/10">
+                <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-cable text-white">
+                  <Icon name={s.icon} class="w-8 h-8" />
                 </span>
-                <h3 class="text-xl font-semibold mt-5">{s.titre}</h3>
-                <p class="mt-2 text-slate-600 text-sm">{s.texte}</p>
+                <h3 class="font-display text-2xl font-bold mt-5">{s.titre}</h3>
+                <p class="mt-2 text-encre/80">{s.texte}</p>
+                <ul class="mt-5 flex flex-wrap gap-2">
+                  {s.items.map((i) => (
+                    <li class="inline-flex items-center gap-1.5 rounded-full bg-rack border border-encre/10 px-3.5 py-1.5 text-sm font-medium">
+                      <Icon name="check" class="w-4 h-4 text-cable shrink-0" />{i}
+                    </li>
+                  ))}
+                </ul>
               </article>
             </li>
           ))}
         </ul>
+
+        <div class="mt-12 flex justify-center">
+          <a href={telLink} class="btn bg-encre text-white hover:bg-cable"><Icon name="phone" class="w-5 h-5" />Demander un devis par téléphone</a>
+        </div>
       </div>
     </section>
 
     <!-- 3. CONTACT -->
-    <section id="contact" class="px-5 py-20">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="reveal text-3xl sm:text-4xl font-bold">Contactez-moi</h2>
-        <p class="reveal mt-3 text-slate-600">Une panne, un projet d'installation ? Parlons-en.</p>
+    <section id="contact" class="on-dark bg-encre text-white px-5 py-20 md:py-28">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="font-display text-4xl sm:text-5xl font-bold max-w-[20ch]">Un problème de réseau ? Appelez-moi.</h2>
+        <a href={telLink} class="mt-8 inline-block font-display font-extrabold text-[clamp(2.25rem,8vw,5.5rem)] leading-none hover:text-ambre transition-colors">{contact.telephone}</a>
 
-        <ul class="reveal mt-10 space-y-3 text-left max-w-md mx-auto">
-          <li><a href={telLink} class="flex items-center gap-4 rounded-2xl border border-slate-200 p-4 hover:border-azur transition-colors"><Icon name="phone" class="w-6 h-6 text-azur shrink-0" />{contact.telephone}</a></li>
-          <li><a href={mailLink} class="flex items-center gap-4 rounded-2xl border border-slate-200 p-4 hover:border-azur transition-colors break-all"><Icon name="mail" class="w-6 h-6 text-azur shrink-0" />{contact.email}</a></li>
-          <li class="flex items-start gap-4 rounded-2xl border border-slate-200 p-4"><Icon name="pin" class="w-6 h-6 text-azur shrink-0 mt-0.5" />{contact.adresse}</li>
+        <ul class="mt-10 space-y-3 text-slate-200">
+          <li><a href={mailLink} class="inline-flex items-center gap-3 min-h-[48px] break-all hover:text-ambre transition-colors"><Icon name="mail" class="w-5 h-5 text-ambre shrink-0" />{contact.email}</a></li>
+          <li class="flex items-start gap-3"><Icon name="pin" class="w-5 h-5 text-ambre shrink-0 mt-1" />{contact.adresse}</li>
         </ul>
 
-        <div class="reveal mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-          <a href={waLink} target="_blank" rel="noopener noreferrer" class="btn gap-2 bg-emerald-700 text-white hover:bg-emerald-800">
-            <Icon name="whatsapp" class="w-5 h-5" />Écrire sur WhatsApp
-          </a>
-          <a href={mapLink} target="_blank" rel="noopener noreferrer" class="btn gap-2 border-2 border-nuit hover:bg-nuit hover:text-white">
-            <Icon name="route" class="w-5 h-5" />Itinéraire
-          </a>
+        <div class="mt-10 flex flex-col sm:flex-row gap-3">
+          <a href={telLink} class="btn bg-ambre text-encre hover:bg-white"><Icon name="phone" class="w-5 h-5" />Appeler</a>
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="btn bg-voyant text-white hover:bg-emerald-600"><Icon name="whatsapp" class="w-5 h-5" />WhatsApp</a>
+          <a href={mapLink} target="_blank" rel="noopener noreferrer" class="btn border-2 border-white/60 hover:bg-white hover:text-encre"><Icon name="route" class="w-5 h-5" />Itinéraire</a>
+        </div>
+
+        <div class="mt-14 overflow-hidden rounded-3xl border border-white/15 aspect-[4/3] sm:aspect-[16/7]">
+          <iframe
+            title={`Carte Google Maps : ${contact.adresse}`}
+            src={`https://www.google.com/maps?q=${encodeURIComponent(contact.adresse)}&output=embed`}
+            class="w-full h-full"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="on-dark bg-nuit text-slate-300 text-center text-sm py-6 px-5 pb-24 sm:pb-6">
-    © {new Date().getFullYear()} {client.nom} — {client.metier}
+  <footer class="on-dark bg-encre text-slate-300 text-sm px-5 py-6 pb-24 sm:pb-6 border-t border-white/10">
+    <div class="max-w-6xl mx-auto">© {new Date().getFullYear()} {client.nom} — {client.metier}</div>
   </footer>
 
-  <a href={telLink} aria-label="Appeler Pascal Catala" class="sm:hidden fixed z-50 right-4 bottom-4 w-14 h-14 rounded-full bg-azur text-white shadow-xl flex items-center justify-center">
+  <a href={telLink} aria-label="Appeler Pascal Catala" class="sm:hidden fixed z-50 right-4 bottom-4 w-14 h-14 rounded-full bg-ambre text-encre shadow-xl flex items-center justify-center">
     <Icon name="phone" class="w-7 h-7" />
   </a>
 
