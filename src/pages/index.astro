@@ -47,8 +47,11 @@ const noeuds = [
           </div>
         </div>
 
-        <!-- Schéma : Pascal relie vos équipements -->
-        <div class="relative mx-auto w-full max-w-[420px] aspect-square" aria-hidden="true">
+        {client.heroImage && (
+          <img src={client.heroImage} alt={client.heroImageAlt} width="1200" height="800" fetchpriority="high" class="mx-auto w-full max-w-[560px] aspect-[3/2] object-cover rounded-[2rem] border border-white/15 shadow-2xl" />
+        )}
+        <!-- Schéma affiché quand aucune photo n'est définie -->
+        <div class:list={["relative mx-auto w-full max-w-[420px] aspect-square", client.heroImage && "hidden"]} aria-hidden="true">
           <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 400" focusable="false">
             {noeuds.map((n) => (
               <line class="link" x1="200" y1="200" x2={n.x * 4} y2={n.y * 4} stroke="#ffb020" stroke-opacity="0.6" stroke-width="2.5" stroke-linecap="round" />

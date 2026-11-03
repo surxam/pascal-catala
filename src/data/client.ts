@@ -3,8 +3,12 @@ export const client = {
   nom: "Pascal Catala",
   metier: "Technicien réseaux & Technicien télécoms",
   accroche: "Installation, mise en service et dépannage de vos réseaux et équipements télécoms.",
+  // 📷 Photo du hero : dépose le fichier dans /public (ex. hero.jpg) puis écris "/hero.jpg" ci-dessous.
+  // Laisse vide pour afficher le schéma réseau animé.
+  heroImage: "/hero.jpg",
+  heroImageAlt: "Homme en costume qui téléphone avec un téléphone fixe dans un bureau",
   presentation:
-    "Basé à Fort-de-France, j'installe, configure et dépanne les réseaux informatiques et les équipements télécoms de votre maison ou de votre local professionnel.",
+    "Basé à Fort-de-France, j'installe, configure et dépanne les réseaux informatiques et les équipements télécoms de votre local professionnel.",
   contact: {
     telephone: "+596 696 25 16 22",
     whatsapp: "596696251622", // chiffres uniquement, avec l'indicatif pays
