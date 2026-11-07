@@ -1,10 +1,10 @@
 // ✏️ Modifie ici les infos du client : tout le site se met à jour automatiquement.
 export const client = {
-  nom: "Pascal Catala",
+  nom: "AZCOM",
   metier: "Technicien réseaux & Technicien télécoms",
   accroche: "Installation, mise en service et dépannage de vos réseaux et équipements télécoms.",
-  // 📷 Photo du hero : dépose le fichier dans /public (ex. hero.jpg) puis écris "/hero.jpg" ci-dessous.
-  // Laisse vide pour afficher le schéma réseau animé.
+  // 📷 Photo du hero (affichée uniquement sur ordinateur) : fichier dans /public.
+  // Laisse vide pour afficher le schéma réseau animé partout.
   heroImage: "/hero.jpg",
   heroImageAlt: "Homme en costume qui téléphone avec un téléphone fixe dans un bureau",
   presentation:
@@ -12,7 +12,7 @@ export const client = {
   contact: {
     telephone: "+596 696 25 16 22",
     whatsapp: "596696251622", // chiffres uniquement, avec l'indicatif pays
-    messageWhatsapp: "Bonjour Pascal, j'aurais besoin d'une intervention réseau / télécoms.",
+    messageWhatsapp: "Bonjour, j'aurais besoin d'une intervention réseau / télécoms.",
     email: "pascalcatala@gmail.com",
     adresse: "28 Av. des Arawaks, 97200 Fort-de-France, Martinique",
   },
